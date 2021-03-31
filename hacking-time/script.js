@@ -2004,43 +2004,63 @@ hhhhbhhhhjhhhh
 dddtpdd`
 
 
-input = input.split('\n');
-inputCheck = inputCheck.split('\n');
+input = input.split(`\n`);
+inputCheck = inputCheck.split(`\n`);
 
 function numberOne() {
     let valid = 0;
-    let bits = [];
-    let pass = [];
-    let letterCheck = [];
 
     for (i in input) {
-        bits.push(input[i].split('-'));
-        letterCheck.push(input[i].split(' '));
-        pass.push(inputCheck[i].split(''));
+        let bits = input[i].split(' ');
+        let pass = inputCheck[i].split('');
 
         //remember if i want to save these then i should push them on an array and i can then clear it later if i need to 
-        let min = bits[i][0];
-        let max = bits[i][2];
-        let letter = bits[i][4];
+        let minMax = bits[0];
+        minMax = minMax.split('-');
+        let min = minMax[0];
+        let max = minMax[1];
+        let letter = bits[1];
+
+        // console.log(`${min} ${max} ${letter}`);
         let count = 0;
-        
-        // for (j in inputCheck) {
-        //     if (inputCheck[j] === letter) {
-        //         count++;
-
-        //     }
-        // }
-        if (count >= min && count <= max) {
-            valid++;
-            console.log('hi');
+        for (j in pass) {
+            if (pass[j] == letter) {
+                count++;
+            }
         }
-
+        if (count > min && count < max) {
+            valid++;
+        }
         ///if the combo contains letter then ++ to a variable and then if statement for if it has over min and under max then it passes and is valid then does ++ to valid
         //i can just check here iwht inputCheck[i]
     }
-    //save input at the time and check value at the time then compare them here and set them back to blank or do += 
-    console.table(bits);
-    console.table(letterCheck);
     console.log(valid);
+    //save input at the time and check value at the time then compare them here and set them back to blank or do += 
 }
 numberOne();
+
+
+function numberTwo() {
+    let valid = 0;
+
+    for (i in input) {
+        let bits = input[i].split(' ');
+        let pass = inputCheck[i].split('');
+
+
+        let minMax = bits[0];
+        minMax = minMax.split('-');
+        let first = minMax[0];
+        let second = minMax[1];
+        let letter = bits[1];
+        first = Number(first - 1);
+        second = Number(second - 1);
+        if ((pass[first] == letter) && (pass[second] == letter)) {
+        }else if ((pass[first] == letter) || (pass[second] == letter)) {
+            valid++;
+        }
+    }
+    console.log(valid);
+
+}
+numberTwo();
